@@ -1,0 +1,15 @@
+payload:
+  # > Spark Mail
+  # USER-AGENT, *spark
+  # USER-AGENT, *Spark
+  - PROCESS-NAME,*spark
+  - PROCESS-NAME,com.readdle.spark
+  - DOMAIN-SUFFIX,gmail.com
+  - DOMAIN-SUFFIX,live.com
+  - DOMAIN-SUFFIX,outlook.com
+  - DOMAIN-SUFFIX,mail.me.com
+  - DOMAIN-SUFFIX,mail.yahoo.com
+  - DOMAIN-SUFFIX,mail.infomaniak.com
+  - DOMAIN-SUFFIX,vodafonemail.de
+  - DOMAIN,imap.vodafone.de
+  - DOMAIN,smtp.vodafone.de

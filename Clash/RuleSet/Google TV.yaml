@@ -1,0 +1,7 @@
+payload:
+  # > Google TV Launcher
+  - PROCESS-NAME,com.google.android.videos
+  - DOMAIN,androidtvlauncherxfe-pa.googleapis.com
+  - DOMAIN,androidtvwatsonfe-pa.googleapis.com 
+  # 懒得抓了
+  - DOMAIN-KEYWORD,pa.google
