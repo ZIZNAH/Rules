@@ -1,6 +1,5 @@
 #!name=Historical Price
 #!desc=Display jd&tb historical price
-#!system=ios
 
 [Script]
 # > 京东App 历史价格 
