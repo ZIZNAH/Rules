@@ -6,3 +6,4 @@ DOMAIN-SUFFIX,chat.openai.com
 # > bing
 DOMAIN-SUFFIX,bing.com
 DOMAIN-SUFFIX,microsoft.com
+DOMAIN-SUFFIX,bingapis.com
