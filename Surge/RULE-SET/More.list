@@ -1,2 +1,7 @@
 # > openai
 DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,api.openai.com
+
+# > bing
+DOMAIN-SUFFIX,bing.com
+DOMAIN-SUFFIX,microsoft.com
