@@ -11,14 +11,3 @@ DOMAIN,hbounify-prod.evergent.com
 // DOMAIN,bcbolthboa-a.akamaihd.net
 DOMAIN,dai3fd1oh325y.cloudfront.net
 
-
-
-# 内容：HBO
-# 数量：7条
-USER-AGENT,HBO%20NOW*
-USER-AGENT,HBOMAX*
-DOMAIN-SUFFIX,hbo.com
-DOMAIN-SUFFIX,hbogo.com
-DOMAIN-SUFFIX,hbomax.com
-DOMAIN-SUFFIX,hbomaxcdn.com
-DOMAIN-SUFFIX,hbonow.com
