@@ -12,3 +12,7 @@ DOMAIN-SUFFIX,identrust.com
 DOMAIN-SUFFIX,bing.com
 DOMAIN-SUFFIX,microsoft.com
 DOMAIN-SUFFIX,bingapis.com
+
+# > translate
+DOMAIN-SUFFIX,translate.google.com
+DOMAIN-SUFFIX,translate.googleapis.com
