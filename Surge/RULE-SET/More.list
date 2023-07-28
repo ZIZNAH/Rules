@@ -21,3 +21,6 @@ DOMAIN-SUFFIX,bingapis.com
 # > translate
 DOMAIN-SUFFIX,translate.google.com
 DOMAIN-SUFFIX,translate.googleapis.com
+
+# > mikan
+DOMAIN-SUFFIX,mikanani.me
