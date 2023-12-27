@@ -2,5 +2,5 @@
 
 DOMAIN-SUFFIX,api.hbo.com
 DOMAIN,play.hbomax.com
-DOMAIN-SUFFIX,max.com
-DOMAIN-SUFFIX,discomax.com
+# DOMAIN-SUFFIX,max.com
+# DOMAIN-SUFFIX,discomax.com
