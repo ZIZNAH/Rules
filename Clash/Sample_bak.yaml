@@ -42,7 +42,7 @@ log-level: info
 ipv6: false
 
 # RESTful web API listening address
-external-controller: 0.0.0.0:9090
+external-controller: 127.0.0.1:9090
 
 # A relative path to the configuration directory or an absolute path to a
 # directory in which you put some static web resource. Clash core will then
@@ -69,16 +69,16 @@ hosts:
   # 'alpha.clash.dev': '::1'
 
   # Firebase Cloud Messaging
-  # 'mtalk.google.com': 108.177.125.188
-  # # Google Dl
-  # 'dl.google.com': 180.163.151.161
-  # 'dl.l.google.com': 180.163.151.161
+  'mtalk.google.com': 108.177.125.188
+  # Google Dl
+  'dl.google.com': 180.163.151.161
+  'dl.l.google.com': 180.163.151.161
 
 # DNS server settings
 # This section is optional. When not present, the DNS server will be disabled.
 dns:
   enable: true
-  listen: 0.0.0.0:5335
+  listen: 0.0.0.0:53
   # ipv6: false # when the false, response to AAAA questions will be empty
 
   # These nameservers are used to resolve the DNS nameserver hostnames below.
@@ -87,7 +87,7 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
     - 8.8.4.4
-    - 1.1.1.1
+    - 1.0.0.1
   enhanced-mode: fake-ip # or redir-host
   fake-ip-range: 198.18.0.1/16 # Fake IP addresses pool CIDR
   # use-hosts: true # lookup hosts and return IP record
@@ -130,8 +130,8 @@ dns:
   # All DNS questions are sent directly to the nameserver, without proxies
   # involved. Clash answers the DNS question with the first result gathered.
   nameserver:
-    - 192.168.5.1
-    - 223.5.5.5
+    - 192.168.31.1
+    - 119.29.29.29
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
     # - tls://dns.rubyfish.cn:853 # DNS over TLS
@@ -184,25 +184,25 @@ dns:
   # Lookup domains via specific nameservers
   nameserver-policy:
     # Alibaba
-    # '*.alibaba.cn': '223.5.5.5'
-    # '*.alibaba.com.cn': '223.5.5.5'
-    # '*.china.alibaba.com': '223.5.5.5'
-    # '*.1688.com': '223.5.5.5'
-    # '*.taobao.com': '223.5.5.5'
-    # '*.tbcache.com': '223.5.5.5'
-    # '*.tmall.com': '223.5.5.5'
-    # '*.alicdn.com': '223.5.5.5'
-    # '*.aliyundrive.com': '223.5.5.5'
-    # '*.aliyun.*': '223.5.5.5'
-    # '*.aliyuncdn.*': '223.5.5.5'
-    # '*.aliyunddos????.com': '223.5.5.5'
-    # '*.aliyuncs.com': '223.5.5.5'
-    # '*.aliyundunwaf.com': '223.5.5.5'
-    # '*.aliapp.com': '223.5.5.5'
-    # '*.aliapp.org': '223.5.5.5'
-    # '*.alibabausercontent.com': '223.5.5.5'
-    # '*.mmstat.com': '223.5.5.5'
-    # 'tb.cn': '223.5.5.5'
+    '*.alibaba.cn': '223.5.5.5'
+    '*.alibaba.com.cn': '223.5.5.5'
+    '*.china.alibaba.com': '223.5.5.5'
+    '*.1688.com': '223.5.5.5'
+    '*.taobao.com': '223.5.5.5'
+    '*.tbcache.com': '223.5.5.5'
+    '*.tmall.com': '223.5.5.5'
+    '*.alicdn.com': '223.5.5.5'
+    '*.aliyundrive.com': '223.5.5.5'
+    '*.aliyun.*': '223.5.5.5'
+    '*.aliyuncdn.*': '223.5.5.5'
+    '*.aliyunddos????.com': '223.5.5.5'
+    '*.aliyuncs.com': '223.5.5.5'
+    '*.aliyundunwaf.com': '223.5.5.5'
+    '*.aliapp.com': '223.5.5.5'
+    '*.aliapp.org': '223.5.5.5'
+    '*.alibabausercontent.com': '223.5.5.5'
+    '*.mmstat.com': '223.5.5.5'
+    'tb.cn': '223.5.5.5'
 
 #
 # https://github.com/Dreamacro/clash/wiki/premium-core-features
@@ -283,7 +283,7 @@ proxy-providers:
 
 proxy-groups:
   # 代理节点选项
-  - name: "Proxy"
+  - name: "🔰 Proxy"
     type: select
     proxies:
       - 🇭🇰 Hong Kong
@@ -294,11 +294,47 @@ proxy-groups:
       - 🇺🇳 Server
       - 🔘 DIRECT
 
-  # 手动选择
-  - name: "manual"
+  # 海外流媒体服务
+  - name: "🎬 Streaming"
     type: select
     proxies:
+      - 🇭🇰 Hong Kong
+      - 🇨🇳 Taiwan
+      - 🇸🇬 Singapore
+      - 🇯🇵 Japan
+      - 🇺🇸 America
       - 🇺🇳 Server
+
+  # 大陆流媒体服务（面向港台版本）
+  - name: "📺 CNTV"
+    type: select
+    proxies:
+      - 🔘 DIRECT
+      - 🇭🇰 Hong Kong
+      - 🇨🇳 Taiwan
+      - 🇸🇬 Singapore
+
+  # 特殊代理服务
+  - name: "📬 Telegram"
+    type: select
+    proxies:
+      - 🔰 Proxy
+      - 🇸🇬 Singapore
+      - 🔘 DIRECT
+
+  - name: "💳 PayPal"
+    type: select
+    proxies:
+      - 🔘 DIRECT
+      - 🔰 Proxy
+      - 🇺🇸 America
+
+  # 去广告以及隐私追踪保护、反运营商劫持开关
+  - name: "🚧 AdGuard"
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
 
   # 直连
   - name: "🔘 DIRECT"
@@ -351,107 +387,151 @@ rule-providers:
 #   path: # 文件路径
 #   url: # 只有当类型为 HTTP 时才可用，您不需要在本地空间中创建新文件。
 #   interval: # 自动更新间隔，仅在类型为 HTTP 时可用
-  sogouinput:
-    type: http
-    behavior: classical
-    format: text
-    interval: 43200
-    url: https://ruleset.skk.moe/Clash/non_ip/sogouinput.txt
-    path: ./sukkaw_ruleset/sogouinput.txt
 
-  ai_non_ip:
+  Unbreak:
     type: http
     behavior: classical
-    format: text
-    interval: 43200
-    url: https://ruleset.skk.moe/Clash/non_ip/ai.txt
-    path: ./sukkaw_ruleset/ai_non_ip.txt
+    path: ./Provider/RuleSet/Unbreak.yaml
+    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Unbreak.yaml
+    interval: 86400
+
+  Advertising:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Guard/Advertising.yaml
+    url: https://raw.githubusercontent.com/HotKids/Rules/master/Clash/RuleSet/AD.yaml
+    interval: 86400
+
+  Hijacking:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Guard/Hijacking.yaml
+    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Guard/Hijacking.yaml
+    interval: 86400
+    
+  Privacy:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Guard/Privacy.yaml
+    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Guard/Privacy.yaml
+    interval: 86400
+
+  Streaming TW:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Streaming/Streaming_TW.yaml
+    url: https://raw.githubusercontent.com/HotKids/Rules/master/Clash/RuleSet/Streaming_TW.yaml
+    interval: 86400
+
+  Streaming JP:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Streaming/Streaming_JP.yaml
+    url: https://raw.githubusercontent.com/HotKids/Rules/master/Clash/RuleSet/Streaming_JP.yaml
+    interval: 86400
+
+  Streaming US:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Streaming/Streaming_US.yaml
+    url: https://raw.githubusercontent.com/HotKids/Rules/master/Clash/RuleSet/Streaming_US.yaml
+    interval: 86400
+
+  Streaming:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Streaming/Streaming.yaml
+    url: https://raw.githubusercontent.com/HotKids/Rules/master/Clash/RuleSet/Streaming.yaml
+    interval: 86400
+
+  CNTV:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Streaming/CNTV.yaml
+    url: https://raw.githubusercontent.com/HotKids/Rules/master/Clash/RuleSet/CNTV.yaml
+    interval: 86400
+    
+  Telegram:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Extra/Telegram.yaml
+    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Extra/Telegram/Telegram.yaml
+    interval: 86400
+
+  PayPal:
+    type: http
+    behavior: classical
+    path: ./Provider/RuleSet/Extra/PayPal.yaml
+    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Extra/PayPal.yaml
+    interval: 86400
 
   Global:
     type: http
     behavior: classical
     path: ./Provider/RuleSet/Global.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml
-    interval: 86400
-
-  Global_Domain:
-    type: http
-    behavior: domain
-    path: ./Provider/RuleSet/Global.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global_Domain.txt
-    interval: 86400
-
-  Proxy:
-    type: http
-    behavior: classical
-    path: ./Provider/RuleSet/Proxy.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy.yaml
-    interval: 86400
-
-  Proxy_Domain:
-    type: http
-    behavior: domain
-    path: ./Provider/RuleSet/Proxy.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Proxy/Proxy_Domain.txt
+    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/Global.yaml
     interval: 86400
 
   China:
     type: http
     behavior: classical
     path: ./Provider/RuleSet/China.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China.yaml
-    interval: 86400
-
-  China_Domain:
-    type: http
-    behavior: domain
-    path: ./Provider/RuleSet/China_Domain
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China_Domain.txt
+    url: https://raw.githubusercontent.com/DivineEngine/Profiles/master/Clash/RuleSet/China.yaml
     interval: 86400
 
   CNCIDR:
     type: http
     behavior: ipcidr
-    path: ./Provider/RuleSet/Extra/ChinaIPs_IP.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaIPs/ChinaIPs_IP.yaml
+    path: ./Provider/RuleSet/Extra/CNCIDR.yaml
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt
     interval: 86400
     
-  LAN:
+  LANCIDR:
     type: http
-    behavior: classical
-    path: ./Provider/RuleSet/Extra/Lan.yaml
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
+    behavior: ipcidr
+    path: ./Provider/RuleSet/Extra/LANCIDR.yaml
+    url: https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt
     interval: 86400
 
 # 规则
 rules:
+  # Unbreak
+  - RULE-SET,Unbreak,🔘 DIRECT
 
-
-  # sougou
-  - RULE-SET,sogouinput,REJECT
-
-  # AI
-  - RULE-SET,ai_non_ip,manual
-
+  # AdBlock
+  - RULE-SET,Advertising,🚧 AdGuard
+  - RULE-SET,Hijacking,🚧 AdGuard
+  - RULE-SET,Privacy,🚧 AdGuard
 
   # Global Area Network
 
+  # Streaming
+  - RULE-SET,Streaming TW,🇨🇳 Taiwan
+  - RULE-SET,Streaming JP,🇯🇵 Japan
+  - RULE-SET,Streaming US,🇺🇸 America
+  - RULE-SET,Streaming,🎬 Streaming
+
+  # CNTV
+  - RULE-SET,CNTV,📺 CNTV
+
+  # Telegram
+  - RULE-SET,Telegram,📬 Telegram
+
+  # PayPal
+  - RULE-SET,PayPal,💳 PayPal
+
   # (DNS Cache Pollution) / (IP Blackhole) / (Region-Restricted Access Denied) / (Network Jitter)
-  - RULE-SET,Global,Proxy
-  - RULE-SET,Global_Domain,Proxy
-  - RULE-SET,Proxy,Proxy
-  - RULE-SET,Proxy_Domain,Proxy
+  - RULE-SET,Global,🔰 Proxy
 
   # China Area Network
   - RULE-SET,China,🔘 DIRECT
-  - RULE-SET,China_Domain,🔘 DIRECT
 
   # Local Area Network
-  - RULE-SET,LAN,🔘 DIRECT
+  - RULE-SET,LANCIDR,🔘 DIRECT
 
   # （可选）使用来自 ipipdotnet 的 ChinaIP 以解决数据不准确的问题，使用 CNCIDR.yaml 时可禁用下列直至（包括）「GEOIP,CN」规则
   - RULE-SET,CNCIDR,🔘 DIRECT
   # GeoIP China(若启用，则禁用 CNCIDR.list)
   # GEOIP,CN,🔘 DIRECT
 
-  - MATCH,Proxy
+  - MATCH,🔰 Proxy
