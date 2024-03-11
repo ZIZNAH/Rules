@@ -217,7 +217,8 @@ tun:
   stack: system # or gvisor
   dns-hijack:
     - any:53
-    # - tcp://any:53
+    - tcp://any:53
 
-  auto-route: true # auto set global route
+# auto set global route
+  # auto-route: true 
   auto-detect-interface: true # conflict with interface-name
