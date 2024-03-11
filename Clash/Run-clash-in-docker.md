@@ -74,7 +74,7 @@ iptables -t nat -A PREROUTING -p udp --dport 53 -j CLASH_DNS
 
 # 将收到的DNS请求转至Clash监听的5353端口。监听端口在config中设置。
 iptables -t nat -A CLASH_DNS -p udp --dport 53 -j DNAT --to-destination 192.168.5.200:5335
-iptables -t nat -A CLASH_DNS -p tcp --dport 53 -j DNAT --to-destination 192.168.5.20:5335
+iptables -t nat -A CLASH_DNS -p tcp --dport 53 -j DNAT --to-destination 192.168.5.200:5335
 
 # 转发全部流量
 #iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports 7892
