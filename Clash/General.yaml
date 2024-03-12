@@ -78,7 +78,7 @@ hosts:
 # This section is optional. When not present, the DNS server will be disabled.
 dns:
   enable: true
-  listen: 0.0.0.0:5335
+  listen: 0.0.0.0:53
   # ipv6: false # when the false, response to AAAA questions will be empty
 
   # These nameservers are used to resolve the DNS nameserver hostnames below.
@@ -220,5 +220,5 @@ tun:
     - tcp://any:53
 
 # auto set global route
-  # auto-route: true 
+  auto-route: true 
   auto-detect-interface: true # conflict with interface-name
