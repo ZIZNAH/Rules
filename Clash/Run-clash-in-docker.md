@@ -8,8 +8,11 @@ version: '3'
 
 services:
 
+  # Enable ip_forward - /etc/sysctl.conf  net.ipv4.ip_forward=1 sudo sysctl -p
+  # For Ubuntu Server, you also need to disable systemd-resolved
+  # 1. sudo systemctl stop systemd-resolved
+  # 2. sudo systemctl disable systemd-resolved
   # Clash
-
   clash:
     image: dreamacro/clash-premium:latest
     container_name: clash
