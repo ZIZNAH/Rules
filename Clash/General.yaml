@@ -84,8 +84,9 @@ dns:
   # These nameservers are used to resolve the DNS nameserver hostnames below.
   # Specify IP addresses only
   default-nameserver:
+    - 114.114.114.114
     - 223.5.5.5
-    - 119.29.29.29
+    - 8.8.8.8
   enhanced-mode: fake-ip # or redir-host
   fake-ip-range: 198.18.0.1/16 # Fake IP addresses pool CIDR
   # use-hosts: true # lookup hosts and return IP record
@@ -144,7 +145,8 @@ dns:
   # The answers from fallback servers are used when the GEOIP country
   # is not `CN`.
   fallback:
-    - https://doh.dns.sb/dns-query
+    - https://1.1.1.1/dns-query
+    - https://dns.google/dns-query
     - https://dns.cloudflare.com/dns-query
     - https://dns.twnic.tw/dns-query
     # - https://dns.cloudflare.com/dns-query
@@ -215,10 +217,8 @@ dns:
 tun:
   enable: true
   stack: system # or gvisor
+  auto-route: true # auto set global route
+  auto-detect-interface: true # conflict with interface-name
   dns-hijack:
     - any:53
     - tcp://any:53
-
-# auto set global route
-  auto-route: true 
-  auto-detect-interface: true # conflict with interface-name
