@@ -12,9 +12,14 @@ services:
   # For Ubuntu Server, you also need to disable systemd-resolved
   # 1. sudo systemctl stop systemd-resolved
   # 2. sudo systemctl disable systemd-resolved
+  # 3. Out of memory limit using limits(version: '3')
   # Clash
   clash:
     image: dreamacro/clash-premium:latest
+    deploy:
+      resources:
+        limits:
+          memory: 300M 
     container_name: clash
     restart: always
     privileged: true
