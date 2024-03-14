@@ -1,25 +1,22 @@
 # 使用clash-premium的TUN模式在linux上开启透明代理
 
-
 ## 1、docker-compose.yml配置
-  
+
 ~~~yaml
+# Enable ip_forward - /etc/sysctl.conf  net.ipv4.ip_forward=1 sudo sysctl -p
+# For Ubuntu Server, you also need to disable systemd-resolved
+# 1. sudo systemctl stop systemd-resolved
+# 2. sudo systemctl disable systemd-resolved
+# 3. Out of memory limit using limits(version3)
+# Clash
 version: '3'
-
 services:
-
-  # Enable ip_forward - /etc/sysctl.conf  net.ipv4.ip_forward=1 sudo sysctl -p
-  # For Ubuntu Server, you also need to disable systemd-resolved
-  # 1. sudo systemctl stop systemd-resolved
-  # 2. sudo systemctl disable systemd-resolved
-  # 3. Out of memory limit using limits(version: '3')
-  # Clash
   clash:
     image: dreamacro/clash-premium:latest
-    deploy:
-      resources:
-        limits:
-          memory: 300M 
+    deploy:
+      resources:
+        limits:
+          memory: 300M
     container_name: clash
     restart: always
     privileged: true
@@ -37,12 +34,26 @@ services:
     ports:
       - "7880:80"
     restart: always
+
 ~~~
 
-  
+以下已不需要，原因如下
+
+1）clash配置文件中，fake-ip开启TUN模式，使用`dns-hijack`劫持所有53端口
+2）`dns`配置必须开启，并且配置nameserver，`listen: 0.0.0.0:53`
+
+以上设置，只需要将网关&dns设置成当前ip即可，clash会自动将请求劫持到自身DNS服务器上进行解析。（有网友说DNS不需要设置也可以使用，这里没有测试，自行测试。）
+
+
+
+------------------------------------------------------------------
+
 ## 2、使用iptables将dns请求转发到clash dns端口
 
+  
+
 ~~~bash
+
 #!/bin/bash
 
 # 清除现有的 iptables 规则
@@ -60,10 +71,10 @@ iptables -P OUTPUT ACCEPT
 
 #在nat表中新建一个clash规则链
 iptables -t nat -N CLASH
+
 #在nat表中新建一个clash_dns规则链
 iptables -t nat -N CLASH_DNS
 
-  
 
 #排除环形地址与保留地址，匹配之后直接RETURN
 iptables -t nat -A CLASH -d 0.0.0.0/8 -j RETURN
@@ -74,19 +85,24 @@ iptables -t nat -A CLASH -d 172.16.0.0/12 -j RETURN
 iptables -t nat -A CLASH -d 192.168.0.0/16 -j RETURN
 iptables -t nat -A CLASH -d 224.0.0.0/4 -j RETURN
 iptables -t nat -A CLASH -d 240.0.0.0/4 -j RETURN
-  
 
 iptables -t nat -A PREROUTING -p tcp -j CLASH
 iptables -t nat -A PREROUTING -p tcp --dport 53 -j CLASH_DNS
 iptables -t nat -A PREROUTING -p udp --dport 53 -j CLASH_DNS
 
+  
+
 # 将收到的DNS请求转至Clash监听的5353端口。监听端口在config中设置。
 iptables -t nat -A CLASH_DNS -p udp --dport 53 -j DNAT --to-destination 192.168.5.200:5335
 iptables -t nat -A CLASH_DNS -p tcp --dport 53 -j DNAT --to-destination 192.168.5.200:5335
+  
 
 # 转发全部流量
 #iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports 7892
+
 ~~~
+
   
 
-虽然摸索了很多，据说clash开启TUN无须使用iptables进行转发，不知是不是因为docker问题，导致无法劫持53的请求到clash，所以还是使用了iptables转发，后面有时间再试试是什么问题吧。
+虽然摸索了很多，据说clash开启TUN无须使用iptables进行转发，不知是不是因为docker问题，导致无法劫持53的请求到clash，所以还是使用了iptables转发，后面有时间再试试是什么问题吧。(已解决)
+
