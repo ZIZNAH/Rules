@@ -43,6 +43,7 @@ ipv6: false
 
 # RESTful web API listening address
 external-controller: 0.0.0.0:9090
+external-ui: /root/ui
 
 # A relative path to the configuration directory or an absolute path to a
 # directory in which you put some static web resource. Clash core will then
@@ -73,6 +74,8 @@ hosts:
   # # Google Dl
   # 'dl.google.com': 180.163.151.161
   # 'dl.l.google.com': 180.163.151.161
+  # sub
+  'sub.store': 192.168.5.200
 
 # DNS server settings
 # This section is optional. When not present, the DNS server will be disabled.
@@ -222,3 +225,11 @@ tun:
   dns-hijack:
     - any:53
     - tcp://any:53
+
+
+script:
+  shortcuts:
+    quic: network == 'udp' and dst_port == 443
+
+rules:
+- SCRIPT,quic,REJECT,no-resolve
