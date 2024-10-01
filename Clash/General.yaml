@@ -148,10 +148,9 @@ dns:
   # The answers from fallback servers are used when the GEOIP country
   # is not `CN`.
   fallback:
-    - https://1.1.1.1/dns-query
-    - https://dns.google/dns-query
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.twnic.tw/dns-query
+    - 8.8.8.8
+    - 1.1.1.1
+    - 8.8.4.4
     # - https://dns.cloudflare.com/dns-query
     # - https://public.dns.iij.jp/dns-query
     # - https://jp.tiar.app/dns-query
@@ -227,9 +226,3 @@ tun:
     - tcp://any:53
 
 
-# script:
-#   shortcuts:
-#     quic: network == 'udp' and dst_port == 443
-
-# rules:
-# - SCRIPT,quic,REJECT,no-resolve
